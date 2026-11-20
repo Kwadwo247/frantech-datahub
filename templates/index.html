@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SellBundle Ghana - Instant Data Bundles & WAEC Checkers</title>
+    <meta name="description"
+        content="Instant MTN, Telecel, and AirtelTigo data bundles in Ghana. Buy BECE and WASSCE result checker PINs and register for MTN AFA with automated instant delivery via Mobile Money.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/storefront.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="brand">
+            <div class="brand-icon">SB</div>
+            <div class="brand-text">
+                <h1>SellBundle</h1>
+            </div>
+            <span class="brand-badge">Ghana 🇬🇭</span>
+        </div>
+
+        <nav class="nav-links">
+            <button class="btn-track-nav" onclick="document.querySelector('[data-tab=\'track\']').click()">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+                Track Order
+            </button>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-pill">
+            <span class="pulse-dot"></span>
+            <span>Automated 24/7 MoMo Instant Fulfillment</span>
+        </div>
+        <h2 class="hero-title">
+            Fastest Data Bundles & <br><span class="hero-gradient-text">WAEC Result Checkers</span>
+        </h2>
+        <p class="hero-subtitle">
+            Direct discount mobile data packages for MTN, Telecel, and AirtelTigo. Instant delivery straight to your
+            recipient phone.
+        </p>
+    </section>
+
+    <!-- MAIN APP CONTENT -->
+    <main class="main-content">
+        <!-- PRODUCT TABS -->
+        <div class="product-tabs" role="tablist">
+            <button class="tab-btn active" data-tab="data-bundles" id="tab-btn-bundles" role="tab">
+                📱 Data Bundles
+            </button>
+            <!-- <button class="tab-btn" data-tab="waec-checkers" id="tab-btn-waec" role="tab">
+                🎓 WAEC Checkers
+            </button> -->
+            <button class="tab-btn" data-tab="afa-reg" id="tab-btn-afa" role="tab">
+                📋 MTN AFA Register
+            </button>
+            <button class="tab-btn" data-tab="track" id="tab-btn-track" role="tab">
+                🔍 Track Order
+            </button>
+        </div>
+
+        <!-- ===================================================================
+             TAB 1: DATA BUNDLES
+             =================================================================== -->
+        <section id="tab-data-bundles" class="tab-panel active" role="tabpanel">
+            <!-- NETWORK SELECTOR -->
+            <div class="network-selector">
+                <div class="network-card active" data-network="mtn" id="net-card-mtn">
+                    <div class="net-logo-circle net-logo-mtn">MTN</div>
+                    <div class="net-details">
+                        <h4>MTN Ghana</h4>
+                        <span>024, 025, 053, 054, 055, 059</span>
+                    </div>
+                </div>
+
+                <div class="network-card telecel" data-network="telecel" id="net-card-telecel">
+                    <div class="net-logo-circle net-logo-telecel">TEL</div>
+                    <div class="net-details">
+                        <h4>Telecel Ghana</h4>
+                        <span>020, 050</span>
+                    </div>
+                </div>
+
+                <div class="network-card at" data-network="at_bigdata" id="net-card-at-big">
+                    <div class="net-logo-circle net-logo-at">AT</div>
+                    <div class="net-details">
+                        <h4>AirtelTigo Big Time</h4>
+                        <span>027, 057, 026, 056</span>
+                    </div>
+                </div>
+
+                <div class="network-card at" data-network="at_ishare" id="net-card-at-ishare">
+                    <div class="net-logo-circle net-logo-at">AT</div>
+                    <div class="net-details">
+                        <h4>AirtelTigo iShare</h4>
+                        <span>027, 057, 026, 056</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BUNDLE GRID -->
+            <div class="bundle-grid" id="bundle-grid">
+                <!-- Injected via JavaScript -->
+            </div>
+
+            <!-- CHECKOUT FORM -->
+            <div class="checkout-box" id="checkout-box">
+                <div class="checkout-box-header">
+                    <h3>Recipient & Payment Details</h3>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Secured via Paystack MoMo</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="customer-phone">Beneficiary Phone Number (Ghana)</label>
+                    <div class="form-input-wrapper">
+                        <input type="tel" id="customer-phone" class="form-input" placeholder="e.g. 0241234567"
+                            maxlength="13">
+                        <span id="phone-hint" class="phone-network-hint" style="display: none;"></span>
+                    </div>
+                    <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; display: block;">
+                        The bundle will be instantly sent directly to this number.
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="customer-email">Email Address (For receipt)</label>
+                    <input type="email" id="customer-email" class="form-input"
+                        placeholder="your-email@example.com (optional)">
+                </div>
+
+                <!-- Order Summary Breakdown -->
+                <div class="checkout-summary"
+                    style="margin-top: 1.5rem; background: rgba(15, 23, 42, 0.5); padding: 1.25rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                    <div class="summary-row">
+                        <span>Selected Network</span>
+                        <span id="summary-network" style="color: #fff; font-weight: 600;">MTN</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Bundle Package</span>
+                        <span id="summary-package" style="color: #fff; font-weight: 600;">None selected</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total Payable</span>
+                        <span id="summary-amount" class="total-amount">GHS 0.00</span>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-primary" id="btn-pay-bundle" disabled>
+                    <span>Proceed to Mobile Money Payment</span>
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 2: WAEC RESULT CHECKERS
+             =================================================================== -->
+        <section id="tab-waec-checkers" class="tab-panel" role="tabpanel">
+            <div class="checker-grid" id="checker-grid">
+                <!-- Injected via JavaScript -->
+            </div>
+
+            <div class="checkout-box">
+                <div class="checkout-box-header">
+                    <h3>Result Checker Purchase</h3>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Instant PIN Display</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="checker-qty">Quantity</label>
+                        <input type="number" id="checker-qty" class="form-input" min="1" max="10" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="checker-phone">Customer Phone Number</label>
+                        <input type="tel" id="checker-phone" class="form-input" placeholder="0241234567">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="checker-email">Email Address</label>
+                    <input type="email" id="checker-email" class="form-input"
+                        placeholder="your-email@example.com (optional)">
+                </div>
+
+                <div class="checkout-summary"
+                    style="margin-top: 1.5rem; background: rgba(15, 23, 42, 0.5); padding: 1.25rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                    <div class="summary-row">
+                        <span>Selected Checker</span>
+                        <span id="checker-sum-name" style="color: #fff; font-weight: 600;">None selected</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total Payable</span>
+                        <span id="checker-sum-total" class="total-amount">GHS 0.00</span>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-primary" id="btn-pay-checker" disabled>
+                    <span>Buy Checkers Now</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 3: MTN AFA REGISTRATION
+             =================================================================== -->
+        <section id="tab-afa-reg" class="tab-panel" role="tabpanel">
+            <div class="checkout-box" style="max-width: 700px; margin: 0 auto;">
+                <div class="checkout-box-header">
+                    <div>
+                        <h3>MTN AFA Bundle Registration</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">
+                            Get registered on the official MTN Farmers/AFA package to unlock cheap high-volume data
+                            rates.
+                        </p>
+                    </div>
+                    <span class="stock-badge stock-in">GHS 10.00 Fee</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="afa-fullname">Full Legal Name (as on Ghana Card)</label>
+                    <input type="text" id="afa-fullname" class="form-input" placeholder="Kwame Mensah">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="afa-phone">MTN Phone Number to Register</label>
+                    <input type="tel" id="afa-phone" class="form-input" placeholder="024XXXXXXX">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="afa-card">Ghana Card PIN</label>
+                    <input type="text" id="afa-card" class="form-input" placeholder="GHA-XXXXXXXXX-X"
+                        style="text-transform: uppercase;">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="afa-town">City / Town</label>
+                        <input type="text" id="afa-town" class="form-input" placeholder="Accra">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="afa-occupation">Occupation</label>
+                        <input type="text" id="afa-occupation" class="form-input"
+                            placeholder="Trader / Teacher / Farmer">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="afa-email">Email Address</label>
+                    <input type="email" id="afa-email" class="form-input"
+                        placeholder="your-email@example.com (optional)">
+                </div>
+
+                <button type="button" class="btn-primary" id="btn-submit-afa">
+                    <span>Submit & Pay GHS 10.00</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 4: TRACK ORDER
+             =================================================================== -->
+        <section id="tab-track" class="tab-panel" role="tabpanel">
+            <div class="tracker-box">
+                <h3 style="margin-bottom: 0.5rem; font-weight: 700;">Track Order Status</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                    Enter your order reference code (e.g. <code>SB-XXXXXXXX</code>) to check delivery progress or view
+                    your WAEC PINs.
+                </p>
+
+                <div class="tracker-search">
+                    <input type="text" id="track-reference-input" class="form-input"
+                        placeholder="Enter Order Reference (e.g. SB-1234ABCD)" style="text-transform: uppercase;">
+                    <button class="btn-primary" id="btn-track-order"
+                        style="width: auto; margin-top: 0; padding: 0.85rem 1.5rem;">
+                        Search
+                    </button>
+                </div>
+
+                <div id="track-result">
+                    <!-- Injected via JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-badges">
+            <div class="footer-badge">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M8 1a2 2 0 0 0-2 2v4H5a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM7 3a1 1 0 0 1 2 0v4H7V3z" />
+                </svg>
+                <span>256-Bit SSL Encrypted</span>
+            </div>
+            <div class="footer-badge">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z" />
+                </svg>
+                <span>Ghana MoMo & Cards Supported</span>
+            </div>
+            <div class="footer-badge">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+                </svg>
+                <span>Instant Vendor Delivery</span>
+            </div>
+        </div>
+        <p>&copy; 2026 SellBundle Ghana. All rights reserved.</p>
+    </footer>
+
+    <!-- App JS -->
+    <script src="/static/js/app.js"></script>
+</body>
+
+</html>
