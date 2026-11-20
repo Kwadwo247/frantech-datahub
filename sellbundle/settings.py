@@ -91,11 +91,33 @@ WSGI_APPLICATION = 'sellbundle.wsgi.application'
 ASGI_APPLICATION = 'sellbundle.asgi.application'
 
 # ------------------------------------------------------------------------------
-# DATABASE CONFIGURATION (PostgreSQL / SQLite fallback)
+# DATABASE CONFIGURATION (PostgreSQL / Railway / SQLite fallback)
 # ------------------------------------------------------------------------------
+DATABASE_URL = config('DATABASE_URL', default='').strip()
 USE_POSTGRESQL = config('USE_POSTGRESQL', default=False, cast=bool)
 
-if USE_POSTGRESQL:
+if DATABASE_URL:
+    # Production / Railway automated connection URL
+    from urllib.parse import urlparse, unquote, parse_qs
+    _url = urlparse(DATABASE_URL)
+    _qs = parse_qs(_url.query)
+    _options = {}
+    if 'sslmode' in _qs:
+        _options['sslmode'] = _qs['sslmode'][0]
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': _url.path.lstrip('/'),
+            'USER': unquote(_url.username or ''),
+            'PASSWORD': unquote(_url.password or ''),
+            'HOST': _url.hostname or '',
+            'PORT': str(_url.port or 5432),
+            'CONN_MAX_AGE': 600,
+            'OPTIONS': _options,
+        }
+    }
+elif USE_POSTGRESQL:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -157,7 +179,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = config(
     'CSRF_TRUSTED_ORIGINS',
-    default='http://localhost:8000,http://127.0.0.1:8000,http://localhost:5173,http://127.0.0.1:5173',
+    default='http://localhost:8000,http://127.0.0.1:8000,http://localhost:5173,http://127.0.0.1:5173,https://*.railway.app,https://*.up.railway.app',
     cast=Csv()
 )
 
@@ -206,8 +228,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ------------------------------------------------------------------------------
 # CELERY & REDIS CONFIGURATION
 # ------------------------------------------------------------------------------
-CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='redis://localhost:6379/0')
-CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default='redis://localhost:6379/0')
+_default_redis = config('REDIS_URL', default='redis://localhost:6379/0')
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', default=_default_redis)
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default=_default_redis)
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
