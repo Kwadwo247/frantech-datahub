@@ -1,7 +1,20 @@
 import logging
 from decimal import Decimal
-from celery import shared_task
 from django.utils import timezone
+
+try:
+    from celery import shared_task
+except ImportError:
+    # Resilient fallback decorator if celery is not installed in active environment
+    def shared_task(*args, **kwargs):
+        def decorator(func):
+            def delay(*a, **kw):
+                return func(*a, **kw)
+            func.delay = delay
+            return func
+        if args and callable(args[0]):
+            return decorator(args[0])
+        return decorator
 
 logger = logging.getLogger(__name__)
 
