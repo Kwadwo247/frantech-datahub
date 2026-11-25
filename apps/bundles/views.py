@@ -22,6 +22,7 @@ class BundleCatalogListView(APIView):
         - min_size: filter by minimum GB data size
         - max_size: filter by maximum GB data size
     """
+    authentication_classes = []
     permission_classes = [AllowAny]
 
     def get(self, request):
@@ -63,6 +64,7 @@ class BundleNetworkListView(APIView):
     GET /api/bundles/networks/
     Returns all supported network operators with active bundle counts and brand styling hints.
     """
+    authentication_classes = []
     permission_classes = [AllowAny]
 
     def get(self, request):

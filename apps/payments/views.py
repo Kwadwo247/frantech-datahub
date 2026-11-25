@@ -33,6 +33,8 @@ class OrderPaymentInitiateView(APIView):
             "reference": "SB-ABCD1234"
         }
     """
+    authentication_classes = []
+    permission_classes = [AllowAny]
     throttle_classes = [AnonRateThrottle]
 
     def post(self, request):
@@ -208,6 +210,7 @@ class PaystackVerifyView(APIView):
     GET /api/payments/verify/<reference>/
     Allows the frontend to manually verify payment status after redirect.
     """
+    authentication_classes = []
     permission_classes = [AllowAny]
 
     def get(self, request, reference):

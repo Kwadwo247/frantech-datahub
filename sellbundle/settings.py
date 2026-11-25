@@ -144,6 +144,7 @@ else:
 # DJANGO REST FRAMEWORK CONFIGURATION
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],

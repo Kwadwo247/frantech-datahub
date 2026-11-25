@@ -2,6 +2,30 @@
  * SellBundle Ghana - Client Application Logic
  */
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function getJsonHeaders() {
+    const headers = { 'Content-Type': 'application/json' };
+    const csrfToken = getCookie('csrftoken');
+    if (csrfToken) {
+        headers['X-CSRFToken'] = csrfToken;
+    }
+    return headers;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // State
     const state = {
@@ -223,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const res = await fetch('/api/orders/', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: getJsonHeaders(),
                 body: JSON.stringify(payload)
             });
 
@@ -358,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const res = await fetch('/api/orders/', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: getJsonHeaders(),
                 body: JSON.stringify(payload)
             });
 
@@ -420,7 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const res = await fetch('/api/orders/', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: getJsonHeaders(),
                 body: JSON.stringify(payload)
             });
 

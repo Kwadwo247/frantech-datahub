@@ -58,6 +58,7 @@ class OrderCreateView(APIView):
             }
         }
     """
+    authentication_classes = []
     permission_classes = [AllowAny]
 
     def post(self, request):
@@ -130,6 +131,7 @@ class OrderDetailView(APIView):
     GET /api/orders/<str:reference>/
     Retrieves live order status, delivery state, and digital vouchers (if completed WAEC checker order).
     """
+    authentication_classes = []
     permission_classes = [AllowAny]
 
     def get(self, request, reference):
@@ -153,6 +155,7 @@ class ResultCheckerTypeListView(APIView):
     GET /api/orders/result-checkers/
     Returns all active WAEC Result Checker types with current stock availability and pricing.
     """
+    authentication_classes = []
     permission_classes = [AllowAny]
 
     def get(self, request):
