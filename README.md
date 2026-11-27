@@ -98,8 +98,8 @@ PAYSTACK_SECRET_KEY=sk_test_placeholder
 PAYSTACK_PUBLIC_KEY=pk_test_placeholder
 PAYSTACK_WEBHOOK_SECRET=placeholder_secret
 
-VENDOR_BASE_URL=https://mydatagigs.com/wp-json/custom/v1
-VENDOR_API_KEY=your_mydatagigs_api_key_here
+VENDOR_BASE_URL= type your vendor website here
+VENDOR_API_KEY=your_vendor_api_key_here
 
 SMS_ENABLED=True
 SMS_PROVIDER=sandbox
